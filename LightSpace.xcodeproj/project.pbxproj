@@ -15,6 +15,7 @@
 		0122398D239A529800022E19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0122398B239A529800022E19 /* LaunchScreen.storyboard */; };
 		01223998239A529800022E19 /* LightSpaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01223997239A529800022E19 /* LightSpaceTests.swift */; };
 		012239A3239A529800022E19 /* LightSpaceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012239A2239A529800022E19 /* LightSpaceUITests.swift */; };
+		012239B3239A608000022E19 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012239B2239A608000022E19 /* Sphere.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		0122399E239A529800022E19 /* LightSpaceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightSpaceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		012239A2239A529800022E19 /* LightSpaceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightSpaceUITests.swift; sourceTree = "<group>"; };
 		012239A4239A529800022E19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		012239B2239A608000022E19 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				01223980239A529700022E19 /* AppDelegate.swift */,
 				01223982239A529700022E19 /* art.scnassets */,
 				01223984239A529700022E19 /* ViewController.swift */,
+				012239B2239A608000022E19 /* Sphere.swift */,
 				01223986239A529700022E19 /* Main.storyboard */,
 				01223989239A529800022E19 /* Assets.xcassets */,
 				0122398B239A529800022E19 /* LaunchScreen.storyboard */,
@@ -262,6 +265,7 @@
 			files = (
 				01223985239A529700022E19 /* ViewController.swift in Sources */,
 				01223981239A529700022E19 /* AppDelegate.swift in Sources */,
+				012239B3239A608000022E19 /* Sphere.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
