@@ -11,11 +11,14 @@
 		01223983239A529700022E19 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 01223982239A529700022E19 /* art.scnassets */; };
 		01223985239A529700022E19 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01223984239A529700022E19 /* ViewController.swift */; };
 		01223988239A529700022E19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01223986239A529700022E19 /* Main.storyboard */; };
-		0122398A239A529800022E19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01223989239A529800022E19 /* Assets.xcassets */; };
 		0122398D239A529800022E19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0122398B239A529800022E19 /* LaunchScreen.storyboard */; };
 		01223998239A529800022E19 /* LightSpaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01223997239A529800022E19 /* LightSpaceTests.swift */; };
 		012239A3239A529800022E19 /* LightSpaceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012239A2239A529800022E19 /* LightSpaceUITests.swift */; };
 		012239B3239A608000022E19 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012239B2239A608000022E19 /* Sphere.swift */; };
+		012239C1239AA22C00022E19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 012239BF239AA22C00022E19 /* Assets.xcassets */; };
+		01F6E54423A1242C00407B3C /* Glow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F6E54323A1242C00407B3C /* Glow.swift */; };
+		01F6E54723A12A5300407B3C /* NodeTechnique.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01F6E54523A12A5300407B3C /* NodeTechnique.plist */; };
+		01F6E54823A12A5300407B3C /* NodeRender.metal in Sources */ = {isa = PBXBuildFile; fileRef = 01F6E54623A12A5300407B3C /* NodeRender.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +44,6 @@
 		01223982239A529700022E19 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		01223984239A529700022E19 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		01223987239A529700022E19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		01223989239A529800022E19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0122398C239A529800022E19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0122398E239A529800022E19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01223993239A529800022E19 /* LightSpaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightSpaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +53,10 @@
 		012239A2239A529800022E19 /* LightSpaceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightSpaceUITests.swift; sourceTree = "<group>"; };
 		012239A4239A529800022E19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		012239B2239A608000022E19 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
+		012239BF239AA22C00022E19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		01F6E54323A1242C00407B3C /* Glow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Glow.swift; sourceTree = "<group>"; };
+		01F6E54523A12A5300407B3C /* NodeTechnique.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = NodeTechnique.plist; path = "../../../../../Downloads/SCNTechniqueGlow-master/SCNTechniqueGlow/NodeTechnique.plist"; sourceTree = "<group>"; };
+		01F6E54623A12A5300407B3C /* NodeRender.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = NodeRender.metal; path = "../../../../../Downloads/SCNTechniqueGlow-master/SCNTechniqueGlow/NodeRender.metal"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,10 +111,13 @@
 				01223982239A529700022E19 /* art.scnassets */,
 				01223984239A529700022E19 /* ViewController.swift */,
 				012239B2239A608000022E19 /* Sphere.swift */,
+				01F6E54323A1242C00407B3C /* Glow.swift */,
 				01223986239A529700022E19 /* Main.storyboard */,
-				01223989239A529800022E19 /* Assets.xcassets */,
 				0122398B239A529800022E19 /* LaunchScreen.storyboard */,
 				0122398E239A529800022E19 /* Info.plist */,
+				012239BF239AA22C00022E19 /* Assets.xcassets */,
+				01F6E54623A12A5300407B3C /* NodeRender.metal */,
+				01F6E54523A12A5300407B3C /* NodeTechnique.plist */,
 			);
 			path = LightSpace;
 			sourceTree = "<group>";
@@ -237,8 +246,9 @@
 			files = (
 				01223983239A529700022E19 /* art.scnassets in Resources */,
 				0122398D239A529800022E19 /* LaunchScreen.storyboard in Resources */,
-				0122398A239A529800022E19 /* Assets.xcassets in Resources */,
+				01F6E54723A12A5300407B3C /* NodeTechnique.plist in Resources */,
 				01223988239A529700022E19 /* Main.storyboard in Resources */,
+				012239C1239AA22C00022E19 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,8 +274,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				01223985239A529700022E19 /* ViewController.swift in Sources */,
+				01F6E54423A1242C00407B3C /* Glow.swift in Sources */,
 				01223981239A529700022E19 /* AppDelegate.swift in Sources */,
 				012239B3239A608000022E19 /* Sphere.swift in Sources */,
+				01F6E54823A12A5300407B3C /* NodeRender.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

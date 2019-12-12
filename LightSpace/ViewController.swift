@@ -10,12 +10,56 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ColorCell: UICollectionViewCell {
+    @IBOutlet weak var colorButton: UIButton!
+}
 
+class ViewController: UIViewController, ARSCNViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+    
     @IBOutlet var sceneView: ARSCNView!
+    @IBOutlet var deleteButton: UIButton!
+    @IBOutlet var collectionViewBackground: UIView!
+    @IBOutlet var collectionView: UICollectionView!
+    
     var cameraPosition: SCNVector3!
     var viewTouching: Bool! = false
+    var selectedColor: UIColor = .red
     
+    let colors: [UIColor] = [
+        .black,
+        .white,
+        .red,
+        .yellow,
+        .green,
+        .brown,
+        .cyan,
+        .orange,
+        .magenta
+    ]
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.colors.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCell", for: indexPath) as! ColorCell
+        cell.colorButton.tintColor = self.colors[indexPath.item]
+        cell.colorButton.addTarget(self, action: #selector(onColorChange), for: .touchUpInside)
+        
+        if self.selectedColor == self.colors[indexPath.item] {
+            cell.colorButton.setImage(UIImage(systemName: "pencil.circle.fill"), for: .normal)
+        }
+        else {
+            cell.colorButton.setImage(UIImage(systemName: "pencil.circle"), for: .normal)
+        }
+        
+        return cell
+    }
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,7 +67,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         
         // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
+        sceneView.showsStatistics = false
         sceneView.debugOptions = .showFeaturePoints
         
         // Create a new scene
@@ -31,6 +75,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Set the scene to the view
         sceneView.scene = scene
+        
+        if let path = Bundle.main.path(forResource: "NodeTechnique", ofType: "plist") {
+            if let dict = NSDictionary(contentsOfFile: path)  {
+                let dict2 = dict as! [String : AnyObject]
+                
+                let technique = SCNTechnique(dictionary: dict2)
+                
+                sceneView.technique = technique
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +99,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         // Run the view's session
         sceneView.session.run(configuration)
+        
+        collectionView.backgroundColor = UIColor(white: 1.0, alpha: 0.0)
+        
+        collectionViewBackground.backgroundColor = UIColor(white: 0.8, alpha: 0.4)
+        collectionViewBackground.layer.cornerRadius = 20.0
+        
+        deleteButton.setImage(UIImage(systemName: "trash.fill"), for: .normal)
+        deleteButton.tintColor = .red
+        deleteButton.sizeThatFits(CGSize(width: 64.0, height: 64.0))
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -75,11 +138,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //Using the + function declared outside this class
         self.cameraPosition = orientation + location
         
-        print(cameraPosition!)
+//        print(cameraPosition!)
         
         if self.viewTouching {
-            let sphereNode = Sphere(at: sceneSpacePosition(inFrontOf: self.sceneView.pointOfView!, atDistance: 1.0), radius: 0.02)
-            sceneView.scene.rootNode.addChildNode(sphereNode)
+            DispatchQueue.main.async {
+                let sphereNode = Sphere(at: sceneSpacePosition(inFrontOf: self.sceneView.pointOfView!, atDistance: 0.15), radius: 0.004, color: self.selectedColor)
+                self.sceneView.scene.rootNode.addChildNode(sphereNode)
+            }
         }
     }
 
@@ -104,6 +169,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.viewTouching.toggle()
+    }
+        
+    @IBAction func onDelete(_ sender: Any) {
+        self.sceneView.scene.rootNode.enumerateChildNodes( { (existingNode, _) in
+            existingNode.removeFromParentNode()
+        })
+    }
+    
+    @objc func onColorChange(_ sender: UIButton) {
+        self.selectedColor = sender.tintColor
+        self.collectionView.reloadData()
     }
 }
 
