@@ -18,12 +18,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, UICollectionViewDeleg
     
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet var deleteButton: UIButton!
+    @IBOutlet var undoButton: UIButton!
     @IBOutlet var collectionViewBackground: UIView!
     @IBOutlet var collectionView: UICollectionView!
     
     var cameraPosition: SCNVector3!
     var viewTouching: Bool! = false
     var selectedColor: UIColor = .red
+    var appendedNodes: [SCNNode] = []
+    var nodesInScene: [[SCNNode]] = []
     
     let colors: [UIColor] = [
         .black,
@@ -59,7 +62,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UICollectionViewDeleg
         
         return cell
     }
-        
+            
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -102,12 +105,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, UICollectionViewDeleg
         
         collectionView.backgroundColor = UIColor(white: 1.0, alpha: 0.0)
         
-        collectionViewBackground.backgroundColor = UIColor(white: 0.8, alpha: 0.4)
+        collectionViewBackground.backgroundColor = UIColor(white: 0.2, alpha: 0.4)
         collectionViewBackground.layer.cornerRadius = 20.0
         
-        deleteButton.setImage(UIImage(systemName: "trash.fill"), for: .normal)
-        deleteButton.tintColor = .red
+        deleteButton.setImage(UIImage(systemName: "trash"), for: .normal)
+        deleteButton.tintColor = .white
         deleteButton.sizeThatFits(CGSize(width: 64.0, height: 64.0))
+        
+        undoButton.setImage(UIImage(systemName: "arrow.uturn.left"), for: .normal)
+        undoButton.tintColor = .white
+        undoButton.sizeThatFits(CGSize(width: 64.0, height: 64.0))
+        undoButton.isEnabled = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -135,16 +143,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, UICollectionViewDeleg
         let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
         let location = SCNVector3(transform.m41, transform.m42, transform.m43)
 
-        //Using the + function declared outside this class
+        //Using the + function declared outside this class to execute an addition between 2 vectors
         self.cameraPosition = orientation + location
         
-//        print(cameraPosition!)
-        
         if self.viewTouching {
-            DispatchQueue.main.async {
-                let sphereNode = Sphere(at: sceneSpacePosition(inFrontOf: self.sceneView.pointOfView!, atDistance: 0.15), radius: 0.004, color: self.selectedColor)
-                self.sceneView.scene.rootNode.addChildNode(sphereNode)
-            }
+            let sphereNode = Sphere(at: sceneSpacePosition(inFrontOf: self.sceneView.pointOfView!, atDistance:0.15), radius: 0.004, color: self.selectedColor)
+            self.sceneView.scene.rootNode.addChildNode(sphereNode)
+            self.appendedNodes.append(sphereNode)
         }
     }
 
@@ -169,12 +174,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, UICollectionViewDeleg
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.viewTouching.toggle()
+        self.nodesInScene.append(self.appendedNodes)
+        self.appendedNodes.removeAll()
+        self.undoButton.isEnabled = self.nodesInScene.count > 0
     }
-        
+    
     @IBAction func onDelete(_ sender: Any) {
         self.sceneView.scene.rootNode.enumerateChildNodes( { (existingNode, _) in
             existingNode.removeFromParentNode()
         })
+    }
+    
+    @IBAction func onUndo(_ sender: UIButton) {
+        for node in self.nodesInScene.last! {
+            node.removeFromParentNode()
+        }
+        self.nodesInScene.popLast()!
+        self.undoButton.isEnabled = self.nodesInScene.count > 1
     }
     
     @objc func onColorChange(_ sender: UIButton) {
