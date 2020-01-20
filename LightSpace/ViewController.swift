@@ -50,6 +50,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCell", for: indexPath) as! ColorCell
+        
         cell.colorButton.tintColor = self.colors[indexPath.item]
         cell.colorButton.addTarget(self, action: #selector(onColorChange), for: .touchUpInside)
         
